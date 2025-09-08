@@ -1,0 +1,29 @@
+<mvc:View
+    controllerName="vat.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="Employee Lookup">
+        <content>
+            <VBox id="_IDGenVBox" class="sapUiSmallMargin">
+                <!-- Input for PS Number -->
+                <Label id="_IDGenLabel1" text="Enter PS Number" />
+                <Input id="psInput" placeholder="Enter PS Number" width="200px" />
+
+                <!-- Fetch Button -->
+                <Button id="_IDGenButton" text="Fetch Data" press=".onFetchEmployeeData" class="sapUiSmallMarginTop" />
+
+                <!-- Employee Name -->
+                <Label id="_IDGenLabel2" text="Employee Name" />
+                <Input id="_IDGenInput" value="{EmployeeModel>/EmployeeName}" editable="false" />
+
+                <!-- Designation -->
+                <Label id="_IDGenLabel3" text="Designation" />
+                <Input id="_IDGenInput1" value="{EmployeeModel>/EmpDesignation}" editable="false" />
+
+                <!-- Performance -->
+                <Label id="_IDGenLabel4" text="Performance" />
+                <Input id="_IDGenInput2" value="{EmployeeModel>/EmpPerformance}" editable="false" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
