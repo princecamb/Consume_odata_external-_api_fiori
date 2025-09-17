@@ -3,9 +3,16 @@
   "authenticationMethod": "route",
   "routes": [
      {
-      "source": "^/odata/v4/my/(.*)$",  
+      "source": "^/odata/v4/employee-service/(.*)$",  
       "target": "/odata/v4/my/$1",       
       "destination": "testod",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/odata/v4/department-service/(.*)$",  
+      "target": "/odata/v4/my/$1",       
+      "destination": "deptod",
       "authenticationType": "none",
       "csrfProtection": false
     },

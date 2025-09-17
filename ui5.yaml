@@ -16,9 +16,14 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend: # <-- Add this backend section
-          - path: /odata/v4/my
+         # Specific path for the Employee service
+          - path: /odata/v4/employee-service
             destination: testod
-            
+            pathPrefix: /odata/v4/my
+          # Specific path for the Department service
+          - path: /odata/v4/department-service
+            destination: deptod
+            pathPrefix: /odata/v4/my
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

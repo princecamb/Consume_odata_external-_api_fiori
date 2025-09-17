@@ -23,6 +23,16 @@
                 <!-- Performance -->
                 <Label id="_IDGenLabel4" text="Performance" />
                 <Input id="_IDGenInput2" value="{EmployeeModel>/EmpPerformance}" editable="false" />
+
+                <Label id="_IDGenLabel11" text="Enter department Number" />
+                <Input id="psInput1" placeholder="Enter dept Number" width="200px" />
+                <Button id="_IDGenButton12" text="Fetch Data" press=".onFetchDeptData" class="sapUiSmallMarginTop" />
+
+
+                <Label id="_IDGenLabel24" text="Department Name" />
+                <Input id="_IDGenInput41" value="{DeptModel>/DepartmentName}" editable="false" />
+
+
             </VBox>
         </content>
     </Page>

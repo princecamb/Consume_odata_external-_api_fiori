@@ -11,6 +11,9 @@ sap.ui.define([
             // Empty JSON model for binding employee data
             var oModel = new JSONModel({});
             this.getView().setModel(oModel, "EmployeeModel");
+
+             var oModel1 = new JSONModel({});
+            this.getView().setModel(oModel1, "DeptModel");
         },
 
 // onFetchEmployeeData: function () {
@@ -80,7 +83,7 @@ onFetchEmployeeData: function () {
 
     debugger;
     // Corrected template literal for URL
-    var url = `odata/v4/my/Employee?$filter=PSnumber eq '${sPsNumber}'`;
+    var url = `odata/v4/employee-service/Employee?$filter=PSnumber eq '${sPsNumber}'`;
     var sUrl = this._getExternalServiceRuntimeBaseURL() + url;
 
     debugger;
@@ -121,6 +124,51 @@ onFetchEmployeeData: function () {
             debugger;
             console.error("Error fetching employee data:", oError);
             MessageToast.show("Failed to fetch employee data.");
+        }
+    });
+},
+
+onFetchDeptData: function () {
+    var sDeptNumber = this.getView().byId("psInput1").getValue(); // Renamed for clarity
+    var oView = this.getView();
+debugger
+    if (!sDeptNumber) {
+        MessageToast.show("Please enter a department number");
+        return;
+    }
+
+    var url = `odata/v4/department-service/Department?$filter=DepartmentID eq '${sDeptNumber}'`;
+    var sUrl = this._getExternalServiceRuntimeBaseURL() + url;
+debugger
+    $.ajax({
+        url: sUrl,
+        method: "GET",
+        success: function (oData1) {
+            if (oData1 && oData1.value && oData1.value.length > 0) {
+                var fullDeptRecord = oData1.value[0];
+
+                // Create a new JSON model
+                var oModel1 = new sap.ui.model.json.JSONModel();
+
+                // Set data into the model
+                oModel1.setData({
+                    DepartmentName: fullDeptRecord.DepartmentName,
+                });
+
+                // Attach the correct model ('oModel') to the view
+                oView.setModel(oModel1, "DeptModel");
+
+                console.log("Fetched Department Record:", fullDeptRecord);
+                console.log("New model was set on the view:", oView.getModel("DeptModel").getData());
+
+                MessageToast.show("Department data fetched and model set successfully.");
+            } else {
+                MessageToast.show("No department found for ID: " + sDeptNumber);
+            }
+        },
+        error: function (oError) {
+            console.error("Error fetching department data:", oError);
+            MessageToast.show("Failed to fetch department data.");
         }
     });
 },
