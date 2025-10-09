@@ -14,6 +14,10 @@ sap.ui.define([
 
              var oModel1 = new JSONModel({});
             this.getView().setModel(oModel1, "DeptModel");
+
+            // Model for Login Data
+            var oLoginModel = new JSONModel({});
+            this.getView().setModel(oLoginModel, "LoginModel");
         },
 
 // onFetchEmployeeData: function () {
@@ -69,6 +73,39 @@ sap.ui.define([
 //         }
 //     });
 // }
+
+onFetchLogin: function () {
+    const oLoginModel = this.getView().getModel("LoginModel");
+    debugger
+    // Get the application's base URL and append the path
+    const sAppRoot = sap.ui.require.toUrl(this.getOwnerComponent().getManifestObject().getComponentName());
+    const sUrl = sAppRoot + "/services/userapi/currentUser";
+    debugger
+
+    $.ajax({
+        url: sUrl,
+        method: "GET",
+        success: function (oData) {
+            if (oData && oData.email) {
+                debugger
+                oLoginModel.setData({ UserID: oData.email });
+                MessageToast.show("Logged-in user ID fetched: " + oData.email);
+            } else {
+                MessageToast.show("Could not retrieve user ID.");
+            }
+        },
+        error: function (oXHR, sTextStatus, sErrorThrown) {
+            // Log more detailed error information
+            console.error("Error fetching user data:", {
+                status: oXHR.status,
+                statusText: sTextStatus,
+                responseText: oXHR.responseText
+            });
+            MessageToast.show(`Failed to fetch user data. Status: ${oXHR.status}`);
+        }
+    });
+},
+
     
 
 onFetchEmployeeData: function () {

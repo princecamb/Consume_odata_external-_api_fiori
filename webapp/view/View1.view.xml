@@ -12,6 +12,13 @@
                 <!-- Fetch Button -->
                 <Button id="_IDGenButton" text="Fetch Data" press=".onFetchEmployeeData" class="sapUiSmallMarginTop" />
 
+
+               <Label id="_IDGenLabel23" text="Logged-in User" />
+<Input id="loginInput" value="{LoginModel>/UserID}" editable="false" />
+<Button id="_IDGenButton13" text="Fetch Login" press=".onFetchLogin" class="sapUiSmallMarginTop" />
+
+
+
                 <!-- Employee Name -->
                 <Label id="_IDGenLabel2" text="Employee Name" />
                 <Input id="_IDGenInput" value="{EmployeeModel>/EmployeeName}" editable="false" />

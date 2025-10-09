@@ -2,6 +2,12 @@
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
   "routes": [
+      {
+      "source": "^/services/userapi/(.*)$",
+      "target": "$1",
+      "service": "sap-approuter-userapi",
+      "authenticationType": "xsuaa"
+    },
      {
       "source": "^/odata/v4/employee-service/(.*)$",  
       "target": "/odata/v4/my/$1",       
